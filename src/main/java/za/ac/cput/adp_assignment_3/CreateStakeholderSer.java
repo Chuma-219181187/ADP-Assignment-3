@@ -2,22 +2,18 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
-*/
-package za.ac.cput.adp_assignment_3;
-/**
- *
- * @author BURGERR
  */
-
+package za.ac.cput.adp_assignment_3;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 /**
  *
- * @author BURGERR
+ * @author Mr Burger
  */
 public class CreateStakeholderSer {
+    
     ObjectOutputStream output;
         public void openFile(){
         try{
@@ -51,9 +47,6 @@ public class CreateStakeholderSer {
            output.writeObject(new Supplier("S290", "MotorMania", "Hyundai", "compact budget"));
            output.writeObject(new Customer("C250", "Eileen", "Sideways", "Nyanga", "1999-11-27", 190.85, true));
            output.writeObject(new Customer("C260", "Ima", "Stewpidas", "Atlantis", "2001-01-27", 1890.70, true));
-           
-       
-           
        }//end try
         catch(IOException fnfe )
         {
@@ -70,5 +63,7 @@ public class CreateStakeholderSer {
         CreateStakeholderSer obj = new CreateStakeholderSer();
         obj.openFile();
         obj.writeToFile();
-    }    
-}//end main
+    }//end main    
+    
+   
+}
