@@ -62,11 +62,12 @@ public class CreateCustomer_and_SupplierSer {
 
         sortCustomerDetails();
         sortSuppliersDetails();
+        
     }
 
     public void readCloseFile() { //This method will close the file after its been created
         try {
-            input.close();
+            input.close(); //Closing the text file
         } catch (IOException ioe) {
             System.out.println("error closing ser file: " + ioe.getMessage());
             System.exit(1);
@@ -74,17 +75,17 @@ public class CreateCustomer_and_SupplierSer {
     }
 
     public void sortCustomerDetails() { //This method will sort the details of the customer by shareholder id
-        String[] sortcustomerID = new String[aCustomer.size()];
+        String[] sortCustomerID = new String[aCustomer.size()];
         ArrayList<Customer> sortAscending = new ArrayList<Customer>();
         int count = aCustomer.size();
         for (int j = 0; j < count; j++) {
-            sortcustomerID[j] = aCustomer.get(j).getStHolderId();
+            sortCustomerID[j] = aCustomer.get(j).getStHolderId();
         }
-        Arrays.sort(sortcustomerID);
+        Arrays.sort(sortCustomerID);
 
         for (int i = 0; i < count; i++) {
             for (int j = 0; j < count; j++) {
-                if (sortcustomerID[i].equals(aCustomer.get(j).getStHolderId())) {
+                if (sortCustomerID[i].equals(aCustomer.get(j).getStHolderId())) {
                     sortAscending.add(aCustomer.get(j));
                 }
             }
@@ -93,17 +94,17 @@ public class CreateCustomer_and_SupplierSer {
         aCustomer = sortAscending;
     }
 
-    public int getcustomerAge(String dateOfBirth) { //This method will determine the age of each custome
-        String[] seperation = dateOfBirth.split("-");
+    public int getCustomerAge(String dateOfBirth) { //This method will determine the age of each customeR
+        String[] seperate = dateOfBirth.split("-");
 
-        LocalDate birth = LocalDate.of(Integer.parseInt(seperation[0]), Integer.parseInt(seperation[1]), Integer.parseInt(seperation[2]));
+        LocalDate birth = LocalDate.of(Integer.parseInt(seperate[0]), Integer.parseInt(seperate[1]), Integer.parseInt(seperate[2]));
         LocalDate current = LocalDate.now();
         Period difference = Period.between(birth, current);
-        int age = difference.getYears();
-        return age;
+        int customerAge = difference.getYears();
+        return customerAge;
     }
 
-    public String formatDob(Customer dateOfBirth) { //This method will re-format the date-of-birth: 1993-01-24  24 Jan 1993
+    public String formatDateOfBrith(Customer dateOfBirth) { //This method will re-format the date-of-birth: 1993-01-24  24 Jan 1993
         LocalDate dob = LocalDate.parse(dateOfBirth.getDateOfBirth());
         DateTimeFormatter changeFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return dob.format(changeFormat);
@@ -111,8 +112,10 @@ public class CreateCustomer_and_SupplierSer {
 
     public String rent() { //This method will determine the number of customers who can rent and those who cannot
         int count = aCustomer.size();
+        
         int cusCanRent = 0;
         int cusNotRent = 0;
+        
         for (int i = 0; i < count; i++) {
             if (aCustomer.get(i).getCanRent()) {
                 cusCanRent = cusCanRent + 1;
@@ -121,6 +124,7 @@ public class CreateCustomer_and_SupplierSer {
             }
         }
         String line = "Number of customers who can rent : " + '\t' + cusCanRent + '\n' + "Number of customers who cannot rent : " + '\t' + cusNotRent;
+        
         return line;
     }
 
@@ -133,7 +137,7 @@ public class CreateCustomer_and_SupplierSer {
             buffWriter.write(String.format("%-15s %-15s %-15s %-15s %-15s\n", "ID", "Name", "Surname", "Date of Birth", "Age"));
             buffWriter.write(String.format("%s\n", "===================================================================="));
             for (int j = 0; j < aCustomer.size(); j++) {
-                buffWriter.write(String.format("%-15s %-15s %-15s %-15s %-15s \n", aCustomer.get(j).getStHolderId(), aCustomer.get(j).getFirstName(), aCustomer.get(j).getSurName(), formatDob(aCustomer.get(j)), getcustomerAge(aCustomer.get(j).getDateOfBirth())));
+                buffWriter.write(String.format("%-15s %-15s %-15s %-15s %-15s \n", aCustomer.get(j).getStHolderId(), aCustomer.get(j).getFirstName(), aCustomer.get(j).getSurName(), formatDob(aCustomer.get(j)), getCustomerAge(aCustomer.get(j).getDateOfBirth())));
             }
             buffWriter.write(String.format("%s\n", " "));
             buffWriter.write(String.format("%s\n", " "));
@@ -148,20 +152,21 @@ public class CreateCustomer_and_SupplierSer {
             System.out.println("error closing text file: " + ioe.getMessage());
             System.exit(1);
         }
+        rent();
     }
 
     public void sortSuppliersDetails() { //This method sort the contents of the supplier arraylist in ascending (alphabetical) order of name.
-        String[] sortsupplierID = new String[aSupplier.size()];
+        String[] sortSupplierID = new String[aSupplier.size()];
         ArrayList<Supplier> sortAscending = new ArrayList<Supplier>();
         int count = aSupplier.size();
         for (int i = 0; i < count; i++) {
-            sortsupplierID[i] = aSupplier.get(i).getName();
+            sortSupplierID[i] = aSupplier.get(i).getName();
         }
-        Arrays.sort(sortsupplierID);
+        Arrays.sort(sortSupplierID);
 
         for (int i = 0; i < count; i++) {
             for (int j = 0; j < count; j++) {
-                if (sortsupplierID[i].equals(aSupplier.get(j).getName())) {
+                if (sortSupplierID[i].equals(aSupplier.get(j).getName())) {
                     sortAscending.add(aSupplier.get(j));
                 }
             }
@@ -193,6 +198,7 @@ public class CreateCustomer_and_SupplierSer {
             System.out.println("error closing text file: " + ioe.getMessage());
             System.exit(1);
         }
+        
     }
 
     public static void main(String args[]) {
