@@ -137,7 +137,7 @@ public class CreateCustomer_and_SupplierSer {
             buffWriter.write(String.format("%-15s %-15s %-15s %-15s %-15s\n", "ID", "Name", "Surname", "Date of Birth", "Age"));
             buffWriter.write(String.format("%s\n", "===================================================================="));
             for (int j = 0; j < aCustomer.size(); j++) {
-                buffWriter.write(String.format("%-15s %-15s %-15s %-15s %-15s \n", aCustomer.get(j).getStHolderId(), aCustomer.get(j).getFirstName(), aCustomer.get(j).getSurName(), formatDob(aCustomer.get(j)), getCustomerAge(aCustomer.get(j).getDateOfBirth())));
+                buffWriter.write(String.format("%-15s %-15s %-15s %-15s %-15s \n", aCustomer.get(j).getStHolderId(), aCustomer.get(j).getFirstName(), aCustomer.get(j).getSurName(), formatDateOfBrith(aCustomer.get(j)), getCustomerAge(aCustomer.get(j).getDateOfBirth())));
             }
             buffWriter.write(String.format("%s\n", " "));
             buffWriter.write(String.format("%s\n", " "));
